@@ -1,9 +1,3 @@
-export KSPDIR		:= ${HOME}/ksp/KSP_linux
-export MANAGED		:= ${KSPDIR}/KSP_Data/Managed
-export GAMEDATA	:= ${KSPDIR}/GameData
-export ELGAMEDATA  := ${GAMEDATA}/ExtraplanetaryLaunchpads
-export PLUGINDIR	:= ${ELGAMEDATA}/Plugins
-
 TARGETS		:= bin/Launchpad.dll
 
 EL_FILES := \
@@ -62,43 +56,30 @@ EL_FILES := \
 	VersionReport.cs					\
 	$e
 
-RESGEN2		:= resgen2
-GMCS		:= mcs
-GMCSFLAGS	:= -optimize -warnaserror -debug
-GIT			:= git
-TAR			:= tar
-ZIP			:= zip
+GMCSFLAGS = -optimize -warnaserror
+ifdef DEBUG
+ GMCSFLAGS+= -debug
+endif
 
-all: version ${TARGETS}
+all: version $(TARGETS)
 
-.PHONY: version
 version:
 	@./tools/git-version.sh
 
-info:
-	@echo "Extraplanetary Launchpads Build Information"
-	@echo "    resgen2:    ${RESGEN2}"
-	@echo "    gmcs:       ${GMCS}"
-	@echo "    gmcs flags: ${GMCSFLAGS}"
-	@echo "    git:        ${GIT}"
-	@echo "    tar:        ${TAR}"
-	@echo "    zip:        ${ZIP}"
-	@echo "    KSP Data:   ${KSPDIR}"
-
-bin/Launchpad.dll: ${EL_FILES}
+bin/Launchpad.dll: $(EL_FILES)
 	@mkdir -p bin
-	${GMCS} ${GMCSFLAGS} -t:library -lib:${MANAGED} \
+	$(GMCS) $(GMCSFLAGS) -t:library -lib:"$(MANAGED)" \
 		-r:Assembly-CSharp,Assembly-CSharp-firstpass \
 		-r:UnityEngine,UnityEngine.UI \
 		-r:KSPUtil \
 		-out:$@ $^
 
 clean:
-	rm -f ${TARGETS}* assembly/AssemblyInfo.cs bin/EL.version
+	rm -f "$(TARGETS)"* assembly/AssemblyInfo.cs bin/EL.version
 	test -d bin && rmdir bin || true
 
 install: all
-	mkdir -p ${PLUGINDIR}
-	cp ${TARGETS} bin/EL.version ${PLUGINDIR}
+	mkdir -p $(PLUGINDIR)
+	cp $(TARGETS) bin/EL.version $(PLUGINDIR)
 
-.PHONY: all clean install
+.PHONY: all clean install version

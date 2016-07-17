@@ -1,24 +1,25 @@
-KSPDIR		:= ${HOME}/ksp/KSP_linux
-MANAGED		:= ${KSPDIR}/KSP_Data/Managed
-GAMEDATA	:= ${KSPDIR}/GameData
-ELGAMEDATA  := ${GAMEDATA}/ExtraplanetaryLaunchpads
-PLUGINDIR	:= ${ELGAMEDATA}/Plugins
-APIEXTDATA	:= ${PLUGINDIR}
+export KSPDIR ?= $(HOME)/ksp/KSP_linux
+export MANAGED = $(KSPDIR)/KSP_Data/Managed
+export GAMEDATA	= $(KSPDIR)/GameData
+export ELGAMEDATA = $(GAMEDATA)/ExtraplanetaryLaunchpads
+export PLUGINDIR = $(ELGAMEDATA)/Plugins
+export APIEXTDATA = $(PLUGINDIR)
 
-RESGEN2	:= resgen2
-GMCS	:= gmcs
-GIT		:= git
-TAR		:= tar
-ZIP		:= zip
+export RESGEN2 = resgen2
+export GMCS = gmcs
+export GIT = git
+export TAR = tar
+export ZIP = zip
+ifdef DEBUG
+  export DEBUG = 1
+endif
 
 .PHONY: all clean info install
 
 SUBDIRS=Assets Documentation GameData Source
 
 all clean install:
-	@for dir in ${SUBDIRS}; do \
-		make -C $$dir $@ || exit 1; \
-	done
+	$(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) $@;)
 
 info:
 	@echo "Extraplanetary Launchpads Build Information"

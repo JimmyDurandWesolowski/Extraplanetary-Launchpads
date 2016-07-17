@@ -516,10 +516,6 @@ namespace ExtraplanetaryLaunchpads {
 			ShipConstruct nship = new ShipConstruct ();
 			nship.LoadShip (craftConfig);
 
-			int numParts = builder.vessel.parts.Count;
-			if (craftType != CraftType.SubAss)
-				numParts = 0;
-
 			string landedAt = "External Launchpad";
 			string flag = flagname;
 			Game game = FlightDriver.FlightStateCache;

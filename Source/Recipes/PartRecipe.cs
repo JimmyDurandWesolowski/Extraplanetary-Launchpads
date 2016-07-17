@@ -62,7 +62,6 @@ namespace ExtraplanetaryLaunchpads {
 				}
 				var subr = rec.Bake (pi.ratio);
 				for (int j = 0; j < subr.ingredients.Count; j++) {
-					var si = subr.ingredients[j];
 					recipe.AddIngredient (subr.ingredients[j]);
 				}
 			}

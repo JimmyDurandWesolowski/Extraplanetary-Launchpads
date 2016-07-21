@@ -18,9 +18,9 @@ clean:
 	rm -f $(IMAGES)
 
 install: all
-	mkdir -p ${ELGAMEDATA}/Agencies
-	cp kairyuu.png kairyuu_scaled.png ${ELGAMEDATA}/Agencies
-	mkdir -p ${ELGAMEDATA}/Textures
-	cp icon_button.png icon_filter.png ${ELGAMEDATA}/Textures
+	mkdir -p "${ELGAMEDATA}/Agencies"
+	cp kairyuu.png kairyuu_scaled.png "${ELGAMEDATA}/Agencies"
+	mkdir -p "${ELGAMEDATA}/Textures"
+	cp icon_button.png icon_filter.png "${ELGAMEDATA}/Textures"
 
 .PHONY: all clean install

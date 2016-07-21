@@ -9,7 +9,7 @@ clean:
 	rm -f *.pdf
 
 install: $(MANUAL) # $(ELGAMEDATA)/$(MANUAL)
-	mkdir -p ${ELGAMEDATA}
-	cp *.pdf ${ELGAMEDATA}
+	mkdir -p "${ELGAMEDATA}"
+	cp *.pdf "${ELGAMEDATA}"
 
 .PHONY: all clean install

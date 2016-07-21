@@ -79,7 +79,7 @@ clean:
 	test -d bin && rmdir bin || true
 
 install: all
-	mkdir -p $(PLUGINDIR)
-	cp $(TARGETS) bin/EL.version $(PLUGINDIR)
+	mkdir -p "$(PLUGINDIR)"
+	cp $(TARGETS) bin/EL.version "$(PLUGINDIR)"
 
 .PHONY: all clean install version

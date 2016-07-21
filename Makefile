@@ -1,4 +1,5 @@
-export KSPDIR ?= $(HOME)/ksp/KSP_linux
+KSPDIR ?= $(HOME)/ksp/KSP_linux
+export KSPDIR := $(subst \ ,\\ ,$(KSPDIR))
 export MANAGED = $(KSPDIR)/KSP_Data/Managed
 export GAMEDATA	= $(KSPDIR)/GameData
 export ELGAMEDATA = $(GAMEDATA)/ExtraplanetaryLaunchpads
